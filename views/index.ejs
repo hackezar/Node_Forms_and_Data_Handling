@@ -1,0 +1,41 @@
+<!-- views/index.ejs -->
+ <!DOCTYPE html>
+ <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/index.css" />
+        <title><%= title %></title>
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <div>
+            <form action="/search" method="GET" style="display: inline";>
+                <input type="text" name="nameSearch" id="nameSearch">
+                <label for="nameSearch">Name</label>
+                <input type="text" name="emailSearch" id="emailSearch">
+                <label for="emailSearch">Email</label>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <ul class="list">
+            <% if (locals.users) {%>
+            <% users.forEach(user => { %>
+            <li class="userItem">
+                <p>ID: <%= user.id %></p>
+                <p>Name: <%= user.firstName %> <%= user.lastName %></p>
+                <p>Email: <%= user.email %></p>
+                <p>Age: <%= user.age %></p>
+                <p>Bio: <%= user.bio %></p>
+                <div class="buttonDiv">
+                    <button type="button" class="button-22" ><a href="/<%= user.id %>/update" class="link" >Update</a></button>
+                    <!-- This time we're sending a POST request to our route, so we needa form -->
+                     <form action="/<%= user.id %>/delete" method="POST" style="display: inline;">
+                        <button type="submit" class="button-22" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                     </form>
+                </div>
+            </li>
+            <% }); %>
+        <% } %>
+        </ul>
+         <a href="/create">Create a user</a>
+    </body>
+ </html>
