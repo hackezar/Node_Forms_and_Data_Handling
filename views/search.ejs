@@ -2,14 +2,15 @@
 <!DOCTYE html>
 <html>
    <head>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
        <title><%= title %></title>
    </head>
    <body>
        <h1><%= title %></h1>
-        <ul>
+        <ul class="list">
             <% if (locals.results) {%>
             <% results.forEach(result => { %>
-            <li>
+            <li class="userItem">
                 <p>ID: <%= result.id %></p>
                 <p>Name: <%= result.firstName %> <%= result.lastName %></p>
                 <p>Email: <%= result.email %></p>
@@ -19,11 +20,13 @@
                 <% if (result.bio) {%>
                     <p><%= result.bio %></p>
                 <% } %>
-                <a href="/<%= result.id %>/update">Update</a>
-                <!-- This time we're sending a POST request to our route, so we needa form -->
-                 <form action="/<%= result.id %>/delete" method="POST" style="display: inline;">
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
-                 </form>
+                <div class="buttonDiv">
+                    <button type="button" class="button-22" ><a class="link" href="/<%= result.id %>/update">Update</a></button>
+                    <!-- This time we're sending a POST request to our route, so we needa form -->
+                    <form action="/<%= result.id %>/delete" method="POST" style="display: inline;">
+                        <button type="submit" class="button-22" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                    </form>
+                </div>
             </li>
         <% }); %>
     <% } %>
